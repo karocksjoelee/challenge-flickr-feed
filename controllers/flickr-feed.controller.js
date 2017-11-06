@@ -15,6 +15,7 @@ exports.getPublicFeed = function() {
       });
 
       response.on('end', () => {
+
         if (response.statusCode !== 200 ) {
           cm.remoteErrHelper(data);
           reject({
@@ -24,9 +25,12 @@ exports.getPublicFeed = function() {
           return;
         }
 
+        // Flickr public feed returns JSONP format .
         let jsonFlickrFeed = new Function('jsonFlickrFeed', data);
         jsonFlickrFeed(function(data){
           cm.logSuc(`[REMOTE-API] ${response.statusCode} GET Public Feeds`);
+          // ##TODO : parse data.item.tags into array of string.
+          // ##TODO : parse data.item.description to clean string . (Without HTML elements)
           resolve(data);
         });
 
