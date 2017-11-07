@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { RealTimeService } from './realtime.service';
+import { RealTimeService } from './shared/realtime.service';
+import { FlickrService } from './shared/flickr.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,10 @@ import { RealTimeService } from './realtime.service';
     FormsModule,
     HttpModule
   ],
-  providers: [RealTimeService],
+  providers: [
+    RealTimeService,
+    FlickrService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

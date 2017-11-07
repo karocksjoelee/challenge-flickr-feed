@@ -1,10 +1,11 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { ConfigService } from './config.service';
 import * as socketio from 'socket.io-client';
 
 export class RealTimeService {
 
-    private url = 'http://localhost:7500';
+    private url = 'http://localhost:6500';
     private socket;
 
     sendMessage(message) {

@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RealTimeService } from './realtime.service';
+import { RealTimeService } from './shared/realtime.service';
+import { FlickrService } from './shared/flickr.service';
+import { FlickrPublicFeed } from './shared/model-interface/flickrPublicFeed.interface';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +14,19 @@ export class AppComponent implements OnInit, OnDestroy {
   messages = [];
   connection;
   message;
+  publicFeeds: FlickrPublicFeed;
 
-  constructor(private realTimeService: RealTimeService) { }
+  constructor(private realTimeService: RealTimeService, private flickrService: FlickrService) { }
 
   ngOnInit() {
 
     this.connection = this.realTimeService.getMessages().subscribe((message) => {
       this.messages.push(message);
+    });
+
+    this.flickrService.getPublicFeeds().subscribe((data) => {
+      this.publicFeeds = data;
+      console.log(this.publicFeeds);
     });
 
   }
