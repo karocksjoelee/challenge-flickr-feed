@@ -29,15 +29,21 @@ exports.getPublicFeed = function() {
         let jsonFlickrFeed = new Function('jsonFlickrFeed', data);
         jsonFlickrFeed(function(data){
           cm.logSuc(`[REMOTE-API] ${response.statusCode} GET Public Feeds`);
-          // ##TODO : parse data.item.tags into array of string.
-          // ##TODO : parse data.item.description to clean string . (Without HTML elements)
+          // Parse data.item.tags into array of string .
+          data.items.forEach((item) => {
+            item.tags = item.tags.split(' ');
+            // Chenk if data.items.tags is an empty string.
+            if (item.tags.length === 1 && item.tags[0] === '') {
+              item.tags = [];
+            }
+          });
           resolve(data);
+          // ## TODO : parse data.item.description to clean string . ( Without HTML elements )
         });
 
       });
     });
 
   });
-
 
 }
