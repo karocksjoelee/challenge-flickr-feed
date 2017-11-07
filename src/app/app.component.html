@@ -1,6 +1,6 @@
 <h1>Flickr Public Feeds</h1>
 
-<div class="gallery cf">
+<div class="gallery cf" *ngIf="publicFeeds">
   <div *ngFor="let publicFeed of publicFeeds.items">
     <img src={{publicFeed.media.m}} />
   </div>

@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.flickrService.getPublicFeeds().subscribe((data) => {
       this.publicFeeds = data;
+      // ## TODO : generate tags button
       console.log(this.publicFeeds);
     });
 
