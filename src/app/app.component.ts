@@ -14,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   messages = [];
   connection;
   message;
-  publicFeeds: FlickrPublicFeed;
+  publicFeeds: any;
 
   constructor(private realTimeService: RealTimeService, private flickrService: FlickrService) { }
 

@@ -1,9 +1,7 @@
-<h1>
-  {{title}}
-</h1>
+<h1>Flickr Public Feeds</h1>
 
-<h2>RealTime Date Demo</h2>
-<div *ngFor="let message of messages">
-  {{message.text}}
+<div class="gallery cf">
+  <div *ngFor="let publicFeed of publicFeeds.items">
+    <img src={{publicFeed.media.m}} />
+  </div>
 </div>
-<input [(ngModel)]="message" /><button (click)="sendMessage()">Send</button>
