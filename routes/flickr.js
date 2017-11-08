@@ -6,10 +6,6 @@ const flickrFeedController = require('../controllers/flickr-feed.controller');
 router.get('/public-feed', (req, res) => {
 
   flickrFeedController.getPublicFeed().then((result) => {
-    // console.log(result);
-    // res.status(200).send(JSON.parse(result));
-    // let test = JSON.parse(result);
-    console.log(typeof result);
     res.status(200).send(result);
   })
     .catch((err) => {
@@ -19,7 +15,6 @@ router.get('/public-feed', (req, res) => {
         res.status(400).send(err);
         return;
       }
-
       res.status(err.statusCodde).send(err.message);
     });
 

@@ -154,3 +154,9 @@ h1 {
 .search .input-search:valid + label {
   text-indent: -9999px;
 }
+
+.icon-close {
+  font-size: 150%;
+  margin-left: 0.3em;
+  color:grey;
+}

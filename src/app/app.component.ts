@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RealTimeService } from './shared/realtime.service';
+import { Component, OnInit } from '@angular/core';
 import { FlickrService } from './shared/flickr.service';
 import { FlickrPublicFeed } from './shared/model-interface/flickrPublicFeed.interface';
 import * as _ from 'lodash';
@@ -9,7 +8,7 @@ import * as _ from 'lodash';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
   title = 'Angular App Works !';
   messages = [];
@@ -17,36 +16,30 @@ export class AppComponent implements OnInit, OnDestroy {
   message;
   publicFeeds: any;
   feedTags: any;
+  searchBar: string;
 
-  constructor(private realTimeService: RealTimeService, private flickrService: FlickrService) { }
+  constructor(private flickrService: FlickrService) { }
 
   ngOnInit() {
 
-    this.connection = this.realTimeService.getMessages().subscribe((message) => {
-      this.messages.push(message);
-    });
+    this.searchBar = '';
 
     this.flickrService.getPublicFeeds().subscribe((data) => {
       this.publicFeeds = data;
-      // ## TODO : generate tags button
       this.feedTags = data.items.map((item) => {
         return item.tags;
       });
       this.feedTags = _.uniq(_.flatten(this.feedTags));
-      console.log(this.feedTags);
-      console.log(this.publicFeeds);
     });
 
   }
 
-  sendMessage() {
-    this.realTimeService.sendMessage(this.message);
-    this.message = '';
+  onClickTag(tag) {
+    this.searchBar = tag;
   }
 
-  ngOnDestroy() {
-
-    this.connection.unsubscribe();
-
+  onClearSearchBar() {
+    this.searchBar = '';
   }
+
 }

@@ -1,22 +1,27 @@
 <h1>Flickr Public Feeds</h1>
 
+<!-- Search Bar -->
 <div class="container">
   <form action="" class="search">
     <div class="field">
-      <input type="text" class="input-search" id="input-search" name="input-search" required>
+      <input type="text" class="input-search" id="input-search" name="input-search" required [(ngModel)]="searchBar">
       <label for="input-search">Search</label>
-    </div> <!-- /field -->
+    </div>
   </form>
+  <span (click)="onClearSearchBar()" class="icon-close large"></span>
 </div>
 
+<!-- Flickr Feeds Gallery -->
 <div class="gallery cf" *ngIf="publicFeeds">
-  <div *ngFor="let publicFeed of publicFeeds.items">
+  <div *ngFor="let publicFeed of publicFeeds.items | tagsFilter:searchBar">
     <img src={{publicFeed.media.m}} />
   </div>
 </div>
 
+
+<!-- Flickr Feeds Tag -->
 <div class="tags">
   <div class="panel">
-    <a href="#" *ngFor="let tag of feedTags"><span class="tag">{{tag}}</span></a>
+    <a (click)="onClickTag(tag)" *ngFor="let tag of feedTags"><span class="tag">{{tag}}</span></a>
   </div>
 </div>
