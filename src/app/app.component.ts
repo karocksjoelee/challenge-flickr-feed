@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RealTimeService } from './shared/realtime.service';
 import { FlickrService } from './shared/flickr.service';
 import { FlickrPublicFeed } from './shared/model-interface/flickrPublicFeed.interface';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   connection;
   message;
   publicFeeds: any;
+  feedTags: any;
 
   constructor(private realTimeService: RealTimeService, private flickrService: FlickrService) { }
 
@@ -27,6 +29,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.flickrService.getPublicFeeds().subscribe((data) => {
       this.publicFeeds = data;
       // ## TODO : generate tags button
+      this.feedTags = data.items.map((item) => {
+        return item.tags;
+      });
+      this.feedTags = _.uniq(_.flatten(this.feedTags));
+      console.log(this.feedTags);
       console.log(this.publicFeeds);
     });
 
