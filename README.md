@@ -1,4 +1,4 @@
-# MEAN-STARTER
+# Code Challenge - Flickr Feed
 
 This project using Mongo DB / Express / Angular-Cli / NodeJS for web application development. 
 
